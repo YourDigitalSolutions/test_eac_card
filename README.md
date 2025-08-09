@@ -1,1 +1,1 @@
-# test_eac_card
+# mini-card-JK

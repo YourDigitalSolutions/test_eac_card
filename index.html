@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HERAIEF JOSEPH - ELYPS AERO CORE</title>
+  <link rel="shortcut icon" href="./Logo_EAC.png" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      transition: opacity 2s ease;
+      opacity: 1;
+    }
+
+    .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .overlay-text img {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 8px #ff00cc);
+    }
+
+    .overlay-text .text {
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px #ff00cc, 0 0 20px #0033ff;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Conteneur logo + texte -->
+  <div class="overlay-text">
+    <img src="./Logo_EAC.png" alt="Logo" />
+    <div class="text">AVIATION SAFETY MANAGEMENT</div>
+  </div>
+
+  <!-- Three.js & script animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
+  <script src="./script.js"></script>
+
+  <!-- Redirection avec fondu -->
+  <script>
+    setTimeout(function () {
+      document.body.style.opacity = '0';
+      setTimeout(function () {
+        window.location.href = "./main_card.html";
+      }, 1000);
+    }, 2000);
+  </script>
+</body>
+</html>

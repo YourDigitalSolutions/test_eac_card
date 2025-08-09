@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HERAIEF JOSEPH - ELYPS AERO CORE</title>
+  <link rel="shortcut icon" href="./logo_EAC.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #0d1e30;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      color: #333;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      padding: 20px;
+      max-width: min(400px, 100%);
+      width: 100%;
+      display: flex;
+      flex-direction: column; /* colonne pour empiler contenu + réseaux */
+      align-items: center;
+      gap: 20px;
+      transition: all 0.3s ease;
+    }
+    /* Ligne photo + contenu */
+    .top-row {
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .photo-wrapper {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      width: 140px;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: #eee;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .avatar:hover {
+      transform: scale(1.1);
+    }
+    .content {
+      flex: 1;
+      text-align: left;
+    }
+    .logo {
+      height: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+    p {
+      margin: 0;
+      color: #666;
+    }
+    /* Réseaux sociaux centrés sur toute la carte */
+    .social-icons {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .social-icons a {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      transition: background 0.3s ease;
+    }
+    .social-icons a:hover {
+      background: #e0e0e0;
+    }
+    .social-icons img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+      filter: grayscale(100%);
+      transition: filter 0.3s ease;
+    }
+    .social-icons a:hover img {
+      filter: grayscale(0%);
+    }
+    /* Boutons partagés */
+    .flex.flex-row.gap-4.justify-center.w-full {
+      width: 100%;
+    }
+    .flex.flex-row.gap-4.justify-center.w-full a {
+      flex-shrink: 1;
+      min-width: 120px;
+      padding: 10px 16px;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    /* Responsive: bascule en colonne et centre tout */
+    @media (max-width: 400px) {
+      .top-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .content {
+        text-align: center;
+      }
+      .avatar {
+        width: 90px;
+        height: 90px;
+      }
+      .social-icons {
+        gap: 8px;
+      }
+      .social-icons a {
+        width: 30px;
+        height: 30px;
+      }
+      .social-icons img {
+        width: 70%;
+        height: 70%;
+      }
+      .flex.flex-row.gap-4.justify-center.w-full {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+      .flex.flex-row.gap-4.justify-center.w-full a {
+        width: 100%;
+        min-width: unset;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+      }
+    }
+
+    .button_story {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  color: #0f1923;
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all .15s ease;
+}
+
+.button_story::before,
+.button_story::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #7D8082;
+  transition: all .15s ease;
+}
+
+.button_story::before {
+  top: 0;
+  border-bottom-width: 0;
+}
+
+.button_story::after {
+  bottom: 0;
+  border-top-width: 0;
+}
+
+.button_story:active,
+.button_story:focus {
+  outline: none;
+}
+
+.button_story:active::before,
+.button_story:active::after {
+  right: 3px;
+  left: 3px;
+}
+
+.button_story:active::before {
+  top: 3px;
+}
+
+.button_story:active::after {
+  bottom: 3px;
+}
+
+.button_lg_story {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #0f1923;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.button_lg_story::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background-color: #0f1923;
+}
+
+.button_lg_story::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background-color: #0f1923;
+  transition: all .2s ease;
+}
+
+.button_sl_story {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: -8px;
+  width: 0;
+  background-color: #FF0000;
+  transform: skew(-15deg);
+  transition: all .2s ease;
+}
+
+.button_text_story {
+  position: relative;
+}
+
+.button_story:hover {
+  color: #0f1923;
+}
+
+.button_story:hover .button_sl_story {
+  width: calc(100% + 15px);
+}
+
+.button_story:hover .button_lg_story::after {
+  background-color: #fff;
+}
+
+.button_site {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  --border-right: 6px;
+  --text-stroke-color: rgba(0, 0, 0, 0);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: black;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+
+.hover-text_site {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0ch;  /* Commence à 0 caractères visibles */
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: width 0.5s ease;
+  white-space: nowrap;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+
+.button_site:hover .hover-text_site {
+  width: 23ch; /* Ajuster selon la longueur du texte */
+  filter: drop-shadow(0 0 23px var(--animation-color));
+}
+    
+  </style>
+</head>
+<body>
+
+ 
+  <style>
+    body {
+      opacity: 0;
+      animation: fadeInBody 2s ease forwards;
+    }
+  
+    @keyframes fadeInBody {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+
+
+  <div class="card">
+    <div class="top-row">
+      <div class="photo-wrapper">
+        <img src="./avatar_jh.png" alt="Photo de profil" class="avatar" />
+      </div>
+      <div class="content">
+        <img src="EAC_TEXT_LOGO.png" alt="Logo" class="logo" style="margin-bottom: 0;" />
+        <h1>HERAIEF Joseph</h1>
+        <p>Président</p>
+      </div>
+    </div>
+
+    <div class="social-icons">
+      
+      <a href="https://www.linkedin.com/in/josephheraief/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
+      </a>
+      <a href="http://tradecompanyfinances.com//" target="_blank" rel="noopener" aria-label="YDS">
+        <img src="logo_EAC.png" alt="Logo" />
+      </a>
+    </div>
+
+    <!-- contact + rdv -->
+    <div class="flex flex-row gap-4 justify-center w-full">
+      <a href="contact_jh.vcf" download
+        style="font-size: 80%;"
+        class="flex justify-center items-center gap-2 px-4 py-2 border-2 rounded-full bg-gray-50 text-gray-800 font-semibold shadow-xl
+               relative overflow-hidden group border-gray-50
+               before:absolute before:w-full before:transition-all before:duration-700
+               before:hover:w-full before:-left-full before:hover:left-0
+               before:rounded-full before:bg-[#E3007D]
+               hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 z-10">
+        📇 Ajouter en contact
+      </a>
+    
+      <a href="https://calendly.com/j-heraief-tradecompanyfinances/30min" target="_blank" rel="noopener"
+        style="font-size: 80%;"
+        class="flex justify-center items-center gap-2 px-4 py-2 border-2 rounded-full bg-gray-50 text-gray-800 font-semibold shadow-xl
+               relative overflow-hidden group border-gray-50
+               before:absolute before:w-full before:transition-all before:duration-700
+               before:hover:w-full before:-left-full before:hover:left-0
+               before:rounded-full before:bg-[#0000FF]
+               hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 z-10">
+        📅 Prendre un RDV
+      </a>
+
+      
+    </div>
+
+    <div class="flex flex-row gap-4 justify-center w-full">
+      <a href="mailto:johe@elypsaerocore.com" target="_blank" rel="noopener"
+      style="font-size: 80%;"
+      class="flex justify-center items-center gap-2 px-4 py-2 border-2 rounded-full bg-gray-50 text-gray-800 font-semibold shadow-xl
+             relative overflow-hidden group border-gray-50
+             before:absolute before:w-full before:transition-all before:duration-700
+             before:hover:w-full before:-left-full before:hover:left-0
+             before:rounded-full before:bg-[#0000FF]
+             hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 z-10">
+             📧 Envoyer un mail
+    </a>
+    </div>
+
+   
+
+  
+
+      <!-- Encadré responsive -->
+<div style="max-width: 100%; width: 100%; margin: 10px auto; padding: 24px; border: 1px solid #ccc; border-radius: 12px; background-color: #f9f9f9; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+  <div id="map" style="width: 100%; height: 300px; border-radius: 8px;"></div>
+</div>
+
+<!-- Leaflet CSS/JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- SCRIPT DE LA MAP -->
+<script>
+  const map = L.map('map').setView([48.839398, 2.308907], 15); // Paris
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors & CartoDB'
+  }).addTo(map);
+  L.marker([48.839398, 2.308907]).addTo(map).bindPopup('ELYPS AERO CORE<br>111, Avenue Victor Hugo<br>75016 PARIS').openPopup();
+</script>
+    
+
+
+    <!-- partager -->
+    <button id="shareBtn" aria-label="Partager" style="
+    cursor: pointer;
+    border: none;
+    background: #00ccff;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    place-content: center;
+    transition: background 300ms, transform 200ms;
+    font-weight: 600;"
+    onmouseover="this.style.background='#000'; this.style.transform='scale(1.05)';
+                 this.querySelector('.button__icon_share.share').style.transform='translate(150%, -150%)';
+                 this.querySelector('.button__icon_share.share').style.transition='transform 0.3s ease-in-out';
+                 this.querySelector('.button__icon_share.checked').style.transform='translate(0)';
+                 this.querySelector('.button__icon_share.checked').style.transition='transform 0.3s ease-in-out 0.1s';"
+    onmouseout="this.style.background='#00ccff'; this.style.transform='scale(1)';
+                this.querySelector('.button__icon_share.share').style.transform='translate(0)';
+                this.querySelector('.button__icon_share.share').style.transition='none';
+                this.querySelector('.button__icon_share.checked').style.transform='translate(-150%, 150%)';
+                this.querySelector('.button__icon_share.checked').style.transition='none';"
+    onmousedown="this.style.transform='scale(0.95)';"
+    onmouseup="this.style.transform='scale(1.05)';"
+  >
+    <!-- Texte tournant -->
+    <div class="button__text_share" style="
+      --letters-count: 19;
+      position: absolute;
+      inset: -15px;
+      animation: text-rotation 8s linear infinite;
+      display: block;">
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 0));">P</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 1));">A</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 2));">R</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 3));">T</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 4));">A</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 5));">G</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 6));">E</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 7));">R</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 8));"> </span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 9));">C</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 10));">E</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 11));"> </span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 12));">P</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 13));">R</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 14));">O</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 15));">F</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 16));">I</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 17));">L</span>
+      <span style="position:absolute; inset:15%; transform: rotate(calc((360deg / 19) * 18));"> </span>
+    </div>
+  
+    <!-- Cercle intérieur contenant les icônes -->
+    <div class="button__circle_share" style="
+      position: relative;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      background: #212121;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;">
+  
+      <!-- Icône Partager (visible par défaut) -->
+      <svg class="button__icon_share share" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           style="position: absolute; transform: translate(0); color:#00ccff;">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+  
+      <!-- Icône Validé (vert, visible au hover) -->
+      <svg class="button__icon_share checked" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           fill="none" stroke="#00ff00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+           style="position: absolute; transform: translate(-150%, 150%);">
+        <path d="M5 13l5 5L20 8" />
+      </svg>
+    </div>
+
+      <script>
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'HERAIEF JOSEPH - Président TCF',
+          text: 'Partages du profil de HERAIEF Joseph, Président au sein de Trades Company Finances, société spécialisée dans l aide à l implantation des entreprises étrangères en France.!',
+          url: 'https://jheraief.yds-digital.com', // ou une URL spécifique
+        });
+        console.log('Contenu partagé avec succès');
+      } catch (err) {
+        console.error('Erreur lors du partage:', err);
+      }
+    } else {
+      alert("Le partage natif n'est pas supporté sur ce navigateur.");
+    }
+  });
+</script>
+      
+    <style>
+      @keyframes text-rotation {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </button>
+
+
+
+
+  </div>
+
+</body>
+</html>
